@@ -5,7 +5,7 @@ import torch
 import os
 
 
-from .hratt_ml import effDWT
+from .hratt_ml import Net
 from options import opt
 
 from optimizer import get_optimizer
@@ -29,7 +29,7 @@ class Model(BaseModel):
         super(Model, self).__init__()
         self.opt = opt
         # self.cleaner = effDWT().to(device=opt.device)
-        self.cleaner = effDWT()   # 测参数量和flops用，先不加载到GPU
+        self.cleaner = Net()   # 测参数量和flops用，先不加载到GPU
 
         self.g_optimizer = get_optimizer(opt, self.cleaner)
         self.scheduler = get_scheduler(opt, self.g_optimizer)
